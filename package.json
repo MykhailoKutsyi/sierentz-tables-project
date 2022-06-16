@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://MykhailoKutsyi.github.io/sierentz-tables-project/",
   "dependencies": {
+    "@babel/eslint-parser": "^7.18.2",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
