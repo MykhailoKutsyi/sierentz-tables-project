@@ -5,4 +5,4 @@
 и настройки дополнительных возможностей
 [обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Live: link
+Live: gh-page: https://mykhailokutsyi.github.io/sierentz-tables-project/ Repo:

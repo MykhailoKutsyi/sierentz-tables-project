@@ -1,0 +1,32 @@
+[
+  {
+    "user": "Mango",
+    "value": 1,
+    "data": "2022-06-16",
+    "comment": "online"
+  },
+  {
+    "user": "Kiwi",
+    "value": 2,
+    "data": "2022-06-16",
+    "comment": "online"
+  },
+  {
+    "user": "Ajax",
+    "value": 3,
+    "data": "2022-06-16",
+    "comment": "offline"
+  },
+  {
+    "user": "Jay",
+    "value": 4,
+    "data": "2022-06-16",
+    "comment": "online"
+  },
+  {
+    "user": "Poly",
+    "value": 5,
+    "data": "2022-06-16",
+    "comment": "online"
+  }
+]
