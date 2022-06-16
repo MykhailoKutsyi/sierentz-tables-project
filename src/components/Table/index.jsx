@@ -52,9 +52,9 @@ const MainTable = () => {
     createData('Lvivska', Lvivska),
   ];
 
-  const handleClick = e => {
+  const handleClick = () => {
     console.log('click on body table');
-    const newWindow = window.open('popup', 'popup', 'popup');
+    window.open('popup', 'popup', 'popup');
   };
 
   return (

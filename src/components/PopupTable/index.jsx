@@ -20,7 +20,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useState } from 'react';
 
-export default function PopupTable({ onClose, link }) {
+export default function PopupTable() {
   const useStyles = makeStyles(() => ({
     formGroupStyles: {
       display: 'flex',
