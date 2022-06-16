@@ -9,15 +9,13 @@ const PopupTable = lazy(() => import('./components/PopupTable'));
 
 export default function App() {
   return (
-    <>
-      <Container>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Table />} />
-            <Route path="popup" element={<PopupTable />} />
-          </Routes>
-        </Suspense>
-      </Container>
-    </>
+    <Container>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Table />} />
+          <Route path="popup" element={<PopupTable />} />
+        </Routes>
+      </Suspense>
+    </Container>
   );
 }
