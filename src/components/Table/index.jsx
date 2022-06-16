@@ -45,7 +45,7 @@ const MainTable = () => {
     ];
     return { name, value };
   }
-
+  // aawd
   const rows = [
     createData('Kyivska', Kyivska),
     createData('Odeska', Odeska),

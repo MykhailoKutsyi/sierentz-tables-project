@@ -92,7 +92,6 @@ export default function PopupTable({ onClose, link }) {
     console.log(rows);
     values.value = '';
   }
-
   const addInfo = (
     <Formik
       initialValues={{ value: '', user: '', comment: '' }}
@@ -210,8 +209,7 @@ export default function PopupTable({ onClose, link }) {
     </>
   );
 }
-
 PopupTable.propTypes = {
-  // onClose: PropTypes.func.isRequired,
-  // link: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  link: PropTypes.string.isRequired,
 };

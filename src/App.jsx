@@ -6,6 +6,7 @@ import Loader from './components/Loader';
 
 const Table = lazy(() => import('./components/Table'));
 const PopupTable = lazy(() => import('./components/PopupTable'));
+
 export default function App() {
   return (
     <>
