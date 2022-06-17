@@ -5,4 +5,6 @@
 и настройки дополнительных возможностей
 [обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Live: gh-page: https://mykhailokutsyi.github.io/sierentz-tables-project/ Repo:
+Live: https://sierentz-tables-project.netlify.app
+
+Repo: https://github.com/MykhailoKutsyi/sierentz-tables-project

@@ -9,12 +9,8 @@ import {
   TableRow,
 } from '@mui/material';
 import data from './testData.json';
-import PopupWindow from '../PopupTable';
-import { useState } from 'react';
 
-const MainTable = () => {
-  const [isOpen, setOpen] = useState(false);
-  console.log(isOpen);
+export default function MainTable() {
   const Kyivska = data[0].Kyivska;
   const Odeska = data[1].Odeska;
   const Lvivska = data[2].Lvivska;
@@ -45,7 +41,7 @@ const MainTable = () => {
     ];
     return { name, value };
   }
-  // aawd
+
   const rows = [
     createData('Kyivska', Kyivska),
     createData('Odeska', Odeska),
@@ -53,8 +49,7 @@ const MainTable = () => {
   ];
 
   const handleClick = () => {
-    console.log('click on body table');
-    window.open('popup', 'popup', 'popup');
+    window.open('popup', 'popup', 'width=1100,height=600');
   };
 
   return (
@@ -91,22 +86,38 @@ const MainTable = () => {
               </TableRow>
             </TableHead>
 
-            <TableBody onClick={handleClick}>
+            <TableBody>
               {rows.map(row => {
                 return (
                   <TableRow align="center" key={row.name}>
                     <TableCell component="th">{row.name}</TableCell>
-                    <TableCell align="center" onClick={() => setOpen(true)}>
+                    <TableCell align="center" onClick={handleClick}>
                       {row.value[0]}
                     </TableCell>
-                    <TableCell align="center">{row.value[1]}</TableCell>
-                    <TableCell align="center">{row.value[2]}</TableCell>
-                    <TableCell align="center">{row.value[3]}</TableCell>
-                    <TableCell align="center">{row.value[4]}</TableCell>
-                    <TableCell align="center">{row.value[5]}</TableCell>
-                    <TableCell align="center">{row.value[6]}</TableCell>
-                    <TableCell align="center">{row.value[7]}</TableCell>
-                    <TableCell align="center">{row.value[8]}</TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[1]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[2]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[3]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[4]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[5]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[6]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[7]}
+                    </TableCell>
+                    <TableCell align="center" onClick={handleClick}>
+                      {row.value[8]}
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -114,9 +125,6 @@ const MainTable = () => {
           </Table>
         </TableContainer>
       </Paper>
-      {isOpen && <PopupWindow />}
     </>
   );
-};
-
-export default MainTable;
+}
