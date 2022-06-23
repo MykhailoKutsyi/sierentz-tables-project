@@ -8,14 +8,23 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import data from './testData.json';
+import dataFromJson from './testData.json';
+import { useGlobalState } from 'hooks/hooks';
 import { nanoid } from 'nanoid';
 
 export default function MainTable() {
+  const [data, setData] = useGlobalState('data', []);
+  const [targetCell, setTargetCel] = useGlobalState('targetCell', []);
+
+  React.useEffect(() => {
+    setData(dataFromJson);
+  }, []);
+
   const yearsArray = ['2017', '2018', '2019'];
   const alphabetArray = ['XX', 'YY', 'ZZ'];
 
-  const handleClick = () => {
+  const handleClick = (region, year, alphabetValue) => {
+    setTargetCel({ region, year, alphabetValue });
     window.open('popup', 'popup', 'width=1100,height=600');
   };
 
@@ -30,54 +39,51 @@ export default function MainTable() {
                 <TableCell rowSpan={2} align="center">
                   Regions
                 </TableCell>
-                {yearsArray.map(year => {
-                  return (
-                    <TableCell
-                      key={nanoid(5)}
-                      colSpan={alphabetArray.length}
-                      align="center"
-                    >
-                      {year}
-                    </TableCell>
-                  );
-                })}
+                {yearsArray.map(year => (
+                  <TableCell
+                    key={nanoid(5)}
+                    colSpan={alphabetArray.length}
+                    align="center"
+                  >
+                    {year}
+                  </TableCell>
+                ))}
               </TableRow>
 
               <TableRow>
-                {yearsArray.map(() => {
-                  return alphabetArray.map(alphabetValue => {
-                    return (
-                      <React.Fragment key={nanoid(5)}>
-                        <TableCell align="center">{alphabetValue}</TableCell>
-                      </React.Fragment>
-                    );
-                  });
-                })}
+                {yearsArray.map(() =>
+                  alphabetArray.map(alphabetValue => (
+                    <React.Fragment key={nanoid(5)}>
+                      <TableCell align="center">{alphabetValue}</TableCell>
+                    </React.Fragment>
+                  ))
+                )}
               </TableRow>
             </TableHead>
 
             <TableBody>
-              {Object.entries(data).map(([region, values]) => {
-                return (
-                  <TableRow key={nanoid(5)}>
-                    <TableCell align="center">{region}</TableCell>
-                    {yearsArray.map(year => {
-                      const yearValues = values.G[year];
-                      return alphabetArray.map(alphabetValue => {
-                        return (
-                          <TableCell
-                            key={nanoid(5)}
-                            align="center"
-                            onClick={handleClick}
-                          >
-                            {yearValues?.[alphabetValue]?.value ?? 0}
-                          </TableCell>
-                        );
-                      });
-                    })}
-                  </TableRow>
-                );
-              })}
+              {Object.entries(data).map(([region, values]) => (
+                <TableRow key={nanoid(5)}>
+                  <TableCell align="center">{region}</TableCell>
+                  {yearsArray.map(year =>
+                    alphabetArray.map(alphabetValue => (
+                      <TableCell
+                        key={nanoid(5)}
+                        align="center"
+                        onClick={() => handleClick(region, year, alphabetValue)}
+                        sx={{
+                          cursor: 'pointer',
+                          '&:hover': {
+                            background: '#8fc9f0',
+                          },
+                        }}
+                      >
+                        {values?.G[year]?.[alphabetValue]?.value ?? 0}
+                      </TableCell>
+                    ))
+                  )}
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
