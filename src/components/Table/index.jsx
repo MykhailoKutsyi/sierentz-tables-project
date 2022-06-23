@@ -23,8 +23,8 @@ export default function MainTable() {
   const yearsArray = ['2017', '2018', '2019'];
   const alphabetArray = ['XX', 'YY', 'ZZ'];
 
-  const handleClick = (region, year, alphabetValue) => {
-    setTargetCel({ region, year, alphabetValue });
+  const handleClick = pathValues => {
+    setTargetCel(pathValues);
     window.open('popup', 'popup', 'width=1100,height=600');
   };
 
@@ -70,7 +70,9 @@ export default function MainTable() {
                       <TableCell
                         key={nanoid(5)}
                         align="center"
-                        onClick={() => handleClick(region, year, alphabetValue)}
+                        onClick={() =>
+                          handleClick({ region, year, alphabetValue })
+                        }
                         sx={{
                           cursor: 'pointer',
                           '&:hover': {

@@ -44,7 +44,7 @@ export default function PopupTable() {
   const [data, setData] = useGlobalState('data', []);
   const [targetCell, setTargetCel] = useGlobalState('targetCell', []);
 
-  const handleAdd = value => {
+  const handleSubmit = value => {
     const alphabetValue = targetCell.alphabetValue;
     const region = targetCell.region;
     const year = targetCell.year;
@@ -52,7 +52,7 @@ export default function PopupTable() {
   };
 
   async function onSubmitForm(values, actions) {
-    handleAdd(values.value);
+    handleSubmit(values.value);
     await actions.setSubmitting(false);
 
     const today = new Date();
@@ -85,8 +85,15 @@ export default function PopupTable() {
       })}
       onSubmit={onSubmitForm}
     >
-      {formik => (
-        <form onSubmit={formik.handleSubmit} className={formStyles}>
+      {({
+        handleSubmit,
+        isSubmitting,
+        values,
+        handleChange,
+        errors,
+        touched,
+      }) => (
+        <form onSubmit={handleSubmit} className={formStyles}>
           <TableContainer>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -100,19 +107,19 @@ export default function PopupTable() {
               </TableHead>
 
               <TableBody>
-                {rows.map(row => (
+                {rows.map(({ value, date, user, comment }) => (
                   <TableRow key={nanoid(5)}>
                     <TableCell align="center" className={tableCellStyles}>
-                      {row.value}
+                      {value}
                     </TableCell>
                     <TableCell align="center" className={tableCellStyles}>
-                      {row.date}
+                      {date}
                     </TableCell>
                     <TableCell align="center" className={tableCellStyles}>
-                      {row.user}
+                      {user}
                     </TableCell>
                     <TableCell align="center" className={tableCellStyles}>
-                      {row.comment}
+                      {comment}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -120,14 +127,14 @@ export default function PopupTable() {
                   <TableCell align="center">
                     <TextField
                       id="value"
-                      disabled={formik.isSubmitting}
-                      value={formik.values.value}
-                      onChange={formik.handleChange}
+                      disabled={isSubmitting}
+                      value={values.value}
+                      onChange={handleChange}
                       type="text"
                       required
                     />
-                    {formik.touched.value && formik.errors.value ? (
-                      <div>{formik.errors.value}</div>
+                    {touched.value && errors.value ? (
+                      <div>{errors.value}</div>
                     ) : null}
                   </TableCell>
 
@@ -138,9 +145,9 @@ export default function PopupTable() {
                       labelId="user-label"
                       id="user"
                       name="user"
-                      value={formik.values.user}
+                      value={values.user}
                       label="user"
-                      onChange={formik.handleChange}
+                      onChange={handleChange}
                       required
                       className={tableCellStyles}
                     >
@@ -155,13 +162,13 @@ export default function PopupTable() {
                   <TableCell>
                     <TextField
                       id="comment"
-                      disabled={formik.isSubmitting}
-                      value={formik.values.comment}
-                      onChange={formik.handleChange}
+                      disabled={isSubmitting}
+                      value={values.comment}
+                      onChange={handleChange}
                       type="text"
                     />
-                    {formik.touched.comment && formik.errors.comment ? (
-                      <div>{formik.errors.comment}</div>
+                    {touched.comment && errors.comment ? (
+                      <div>{errors.comment}</div>
                     ) : null}
                   </TableCell>
                 </TableRow>
@@ -176,12 +183,8 @@ export default function PopupTable() {
             >
               Close
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={formik.isSubmitting}
-            >
-              {formik.isSubmitting ? 'Adding...' : 'Add'}
+            <Button type="submit" variant="contained" disabled={isSubmitting}>
+              {isSubmitting ? 'Adding...' : 'Add'}
             </Button>
           </div>
         </form>
