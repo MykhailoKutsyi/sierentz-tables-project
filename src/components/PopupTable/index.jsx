@@ -45,10 +45,10 @@ export default function PopupTable() {
   const [targetCell, setTargetCel] = useGlobalState('targetCell', []);
 
   const handleSubmit = value => {
-    const alphabetValue = targetCell.alphabetValue;
+    const alphabet = targetCell.alphabet;
     const region = targetCell.region;
     const year = targetCell.year;
-    data[region].G[year][alphabetValue].value = value;
+    data[region].G[year][alphabet].value = value;
   };
 
   async function onSubmitForm(values, actions) {

@@ -20,13 +20,31 @@ export default function MainTable() {
     setData(dataFromJson);
   }, []);
 
-  const yearsArray = ['2017', '2018', '2019'];
-  const alphabetArray = ['XX', 'YY', 'ZZ'];
+  const yearsArray = [];
+  const alphabetArray = [];
 
   const handleClick = pathValues => {
     setTargetCel(pathValues);
     window.open('popup', 'popup', 'width=1100,height=600');
   };
+
+  const handleAddArray = (array, element) => {
+    array.indexOf(element) === -1 && array.push(element);
+  };
+
+  const handleFillArray = () => {
+    Object.values(data).map(values =>
+      Object.values(values).map(value =>
+        Object.entries(value).map(([year, yearValues]) => {
+          handleAddArray(yearsArray, year);
+          Object.entries(yearValues).map(([alphabet]) =>
+            handleAddArray(alphabetArray, alphabet)
+          );
+        })
+      )
+    );
+  };
+  handleFillArray();
 
   return (
     <React.Fragment>
@@ -66,12 +84,13 @@ export default function MainTable() {
                 <TableRow key={nanoid(5)}>
                   <TableCell align="center">{region}</TableCell>
                   {yearsArray.map(year =>
-                    alphabetArray.map(alphabetValue => (
+                    alphabetArray.map(alphabet => (
                       <TableCell
                         key={nanoid(5)}
                         align="center"
                         onClick={() =>
-                          handleClick({ region, year, alphabetValue })
+                          values?.G[year]?.[alphabet] &&
+                          handleClick({ region, year, alphabet })
                         }
                         sx={{
                           cursor: 'pointer',
@@ -80,7 +99,7 @@ export default function MainTable() {
                           },
                         }}
                       >
-                        {values?.G[year]?.[alphabetValue]?.value ?? 0}
+                        {values?.G[year]?.[alphabet]?.value ?? '0*'}
                       </TableCell>
                     ))
                   )}
@@ -88,6 +107,7 @@ export default function MainTable() {
               ))}
             </TableBody>
           </Table>
+          <p> * - Can't edit this value</p>
         </TableContainer>
       </Paper>
     </React.Fragment>
